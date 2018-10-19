@@ -1,0 +1,24 @@
+{
+  "name": "angel_beats",
+  "version": "1.0.0",
+  "description": "A music sync application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajraj27/Angel_Beats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajraj27/Angel_Beats/issues"
+  },
+  "homepage": "https://github.com/ajraj27/Angel_Beats#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  }
+}
