@@ -20,6 +20,7 @@
 
     <script>
     var socket = io('http://localhost:' + window.location.port);
+    var audio = document.querySelector('audio');
 
     // socket.on('newMessage',function(){
     //   var seeker = document.getElementById("audio");
@@ -28,18 +29,23 @@
     socket.on('connect', () => {
           ss(socket).on('audio-stream', function(stream, data) {
               parts = [];
-              
+
               stream.on('data', (chunk) => {
                   parts.push(chunk);
               });
 
               stream.on('end', function () {
-                  var audio = document.querySelector('audio');
                   audio.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
                   audio.play();
               });
           });
     });
+
+    socket.on('setStart',() => {
+        audio.currentTime=0;
+    });
+
+
     </script>
 </body>
 </html>
