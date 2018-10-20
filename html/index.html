@@ -4,42 +4,66 @@
 <head>
     <meta charset="utf-8">
     <title>bb</title>
+    <script src="/socket.io/socket.io.js "></script>
+    <script src="/js/socket.io-stream.js"></script>
+    <script src="jq.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <script src="/socket.io/socket.io.js "></script>
-    <script src="/js/socket.io-stream.js"></script>
-    <script src="jq.js "></script>
-    <h1>Audio Testing 1 2 3</h1>
+      <div id='title'>Angel Beats</div>
+      <div id='ctrls'>
+        <div class="svg-wrapper">
+          <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+            <rect id="shape" height="40" width="150" />
+            <div id="text">
+              <a href=""><span class="spot"></span>Create Room</a>
+            </div>
+          </svg>
+        </div>
+        <div class="svg-wrapper">
+          <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+            <rect id="shape" height="40" width="150" />
+            <div id="text">
+              <a href=""><span class="spot"></span>Join Room</a>
+            </div>
+          </svg>
+        </div>
+      </div>
     <audio id="audio" controls loop>
     <source src="" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
   <br>
 
-
-    <script>
-    var socket = io('http://localhost:' + window.location.port);
-
-    // socket.on('newMessage',function(){
-    //   var seeker = document.getElementById("audio");
-    //   seeker.currentTime=0;
-    // });
-    socket.on('connect', () => {
-          ss(socket).on('audio-stream', function(stream, data) {
-              parts = [];
-              
-              stream.on('data', (chunk) => {
-                  parts.push(chunk);
-              });
-
-              stream.on('end', function () {
-                  var audio = document.querySelector('audio');
-                  audio.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
-                  audio.play();
-              });
-          });
-    });
-    </script>
 </body>
+<script>
+var socket = io('http://localhost:' + window.location.port);
+
+// socket.on('newMessage',function(){
+//   var seeker = document.getElementById("audio");
+//   seeker.currentTime=0;
+// });
+socket.on('connect', () => {
+      ss(socket).on('audio-stream', function(stream, data) {
+          parts = [];
+
+          stream.on('data', (chunk) => {
+              parts.push(chunk);
+          });
+
+          stream.on('end', function () {
+              var audio = document.querySelector('audio');
+              audio.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
+              audio.play();
+          });
+      });
+});
+</script>
+
+
 </html>
