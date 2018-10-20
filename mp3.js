@@ -14,6 +14,7 @@ server.listen(8000);
 // });
 
 io.on('connection', function (socket) {
+    io.emit('setStart');
     var stream = ss.createStream();
     var filename = __dirname + '/penningen.mp3' ;
     fs.createReadStream(filename).pipe(stream);
