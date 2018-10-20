@@ -41,29 +41,6 @@
   <br>
 
 </body>
-<script>
-var socket = io('http://localhost:' + window.location.port);
-
-// socket.on('newMessage',function(){
-//   var seeker = document.getElementById("audio");
-//   seeker.currentTime=0;
-// });
-socket.on('connect', () => {
-      ss(socket).on('audio-stream', function(stream, data) {
-          parts = [];
-
-          stream.on('data', (chunk) => {
-              parts.push(chunk);
-          });
-
-          stream.on('end', function () {
-              var audio = document.querySelector('audio');
-              audio.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
-              audio.play();
-          });
-      });
-});
-</script>
 
 
     <script>
