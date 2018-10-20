@@ -20,35 +20,26 @@
 
     <script>
     var socket = io('http://localhost:' + window.location.port);
-    var audio = document.getElementById('audioSource');
-    console.log("hoi");
 
-    socket.on('newMessage',function(){
-      var seeker = document.getElementById("audio");
-      seeker.currentTime=0;
-    });
-    socket.on('start', function (data) {
-
-        console.log("start");
-
-        console.log(data);
-        // socket.emit('my other event', { my: 'data' });
-        socket.emit('stream', { my: 'data' });
-          console.log("");
+    // socket.on('newMessage',function(){
+    //   var seeker = document.getElementById("audio");
+    //   seeker.currentTime=0;
+    // });
+    socket.on('connect', () => {
           ss(socket).on('audio-stream', function(stream, data) {
               parts = [];
-              console.log("DATA -->> ")
+              
               stream.on('data', (chunk) => {
-                  console.log(chunk);
                   parts.push(chunk);
               });
+
               stream.on('end', function () {
-                  var audio = document.getElementById('audio');
+                  var audio = document.querySelector('audio');
                   audio.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
                   audio.play();
               });
           });
-        });
+    });
     </script>
 </body>
 </html>
