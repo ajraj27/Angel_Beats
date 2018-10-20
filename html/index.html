@@ -52,7 +52,6 @@ socket.on('connect', () => {
       ss(socket).on('audio-stream', function(stream, data) {
           parts = [];
 
-<<<<<<< HEAD
           stream.on('data', (chunk) => {
               parts.push(chunk);
           });
@@ -67,7 +66,6 @@ socket.on('connect', () => {
 </script>
 
 
-=======
     <script>
     var socket = io('http://localhost:' + window.location.port);
     var audio = document.querySelector('audio');
@@ -98,5 +96,4 @@ socket.on('connect', () => {
 
     </script>
 </body>
->>>>>>> 06acf6e1dec01394d9d4ef50cfa269763fcf0aa5
 </html>
