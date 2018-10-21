@@ -10,7 +10,6 @@
 
 body{
   width: 100wh;
-	height: 90vh;
 	color: #fff;
 	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 	background-size: 400% 400%;
@@ -127,4 +126,21 @@ make it thinner, then set it to again wrap around the entire parent element.
   align-items: center;
   text-align: center;
   margin-top: 2%;
+}
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: black;
+   color: white;
+   height: 6%;
+   text-align: center;
+   padding-top: 3px;
+}
+
+
+#audio{
+  margin-top: 5%;
+  margin-left:39%;
 }
